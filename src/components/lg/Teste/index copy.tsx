@@ -1,6 +1,6 @@
 import { tags } from "../../../mocks/tags"
 import { StyledDiv } from "./styles"
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface LinkProps {
     linkName: string,
@@ -19,21 +19,20 @@ export function Teste(){
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [filteredImages, setFilteredImages] = useState<ImageProps[]>(tags)
 
-    useEffect(() => {
-        const findedByTag = tags.filter((tag) => tag.tags.includes(selectedTag))
-        
-        selectedTag === 'all' ?
-            setFilteredImages(tags)
-        :
-            setFilteredImages(findedByTag)
-
-    }, [selectedTag])
+    // useEffect(() => {
+    //     setFilteredImages(tags)
+    // }, [selectedTag])
 
     function handleSearch(){
         const findedByName = tags.filter((tag) => tag.name.includes(searchTerm));
         setFilteredImages(findedByName)
     }
-    
+
+    function selectTag(){
+        const findedByTag = tags.filter((tag) => tag.tags.includes(selectedTag))
+        setFilteredImages(findedByTag)
+    }
+
     return(
         <StyledDiv>
             <div className="tags">
@@ -49,7 +48,9 @@ export function Teste(){
 
             <ul className="cards">
                 {
-                    filteredImages.map((image) => (
+                selectedTag === 'all' ?
+
+                    tags.map((image) => (
                         <li>
                             <h3>{image.name}</h3>
                             <div>
@@ -61,7 +62,36 @@ export function Teste(){
                             </div>
                         </li>
                     ))
+
+                :
+                // const filteredTags = tags.filter((tag) => tag.tags.includes('mobile'));
+                    tags.map((image) => (
+
+                        image.tags.includes(selectedTag) && (
+                            <li>
+                                <h3>{image.name}</h3>
+                                <div>
+                                    {image.tags.map((tags) => (
+                                        <span>
+                                            {tags}
+                                        </span>
+                                    ))}
+                                </div>
+                            </li>
+                        )
+                        
+                    ))
+
                 }
+            </ul>
+
+            <ul>
+                <li><h2>Find By Name</h2></li>
+                {filteredImages.map((image) => (
+                    <li>
+                        <p>{image.name}</p>
+                    </li>
+                ))}
             </ul>
         </StyledDiv>
     )

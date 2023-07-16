@@ -5,7 +5,6 @@ export const tags = [
         name: 'Nome de teste',
         path: `${default_path}/`,
         tags: ['mobile', 'dark-mode'],
-        group: [],
         links: [
             {
                 linkName: 'imagem original',
@@ -17,7 +16,6 @@ export const tags = [
         name: 'Imagem 45',
         path: `${default_path}/`,
         tags: ['mobile', 'desktop'],
-        group: [],
         links: [
             {
                 linkName: 'imagem original',
@@ -29,7 +27,6 @@ export const tags = [
         name: 'Alguma coisa',
         path: `${default_path}/`,
         tags: ['ideias', 'light'],
-        group: [],
         links: [
             {
                 linkName: 'imagem original',
